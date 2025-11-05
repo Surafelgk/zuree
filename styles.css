@@ -1,12 +1,12 @@
 :root {
     --primary: #e63946;
     --primary-dark: #c1121f;
-    --secondary: #1d3557;
-    --accent: #457b9d;
+    --secondary: rgb(139, 64, 64);
+    --accent: #ef4747;
     --light: #f1faee;
-    --dark: #1d3557;
-    --gradient: linear-gradient(135deg, #e63946 0%, #1d3557 100%);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --dark: #ac7272;
+    --gradient: linear-gradient(135deg, #ef4747 0%, #571d1d 80%);
+    --shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
     --transition: all 0.3s ease;
 }
 
@@ -250,8 +250,8 @@ a {
 }
 
 .about-logos img {
-    height: 40px;
-    opacity: 0.7;
+    height: 50px;
+    opacity: 1;
     transition: var(--transition);
 }
 
