@@ -1,12 +1,13 @@
 :root {
     --primary: #e63946;
     --primary-dark: #c1121f;
-    --secondary: rgb(139, 64, 64);
-    --accent: #ef4747;
+    --secondary: #1d3557;
+    --accent: #a8dadc;
     --light: #f1faee;
-    --dark: #ac7272;
-    --gradient: linear-gradient(135deg, #ef4747 0%, #571d1d 80%);
-    --shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
+    --text-color: #ffffff;
+    --dark: #1d3557;
+    --gradient: linear-gradient(135deg, #e63946 0%, #1d3557 100%);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     --transition: all 0.3s ease;
 }
 
@@ -186,7 +187,7 @@ a {
 /* Hero Section */
 .hero {
     background: var(--gradient);
-    color: white;
+    color: var(--text-color);
     padding: 150px 0 100px;
     position: relative;
     overflow: hidden;
@@ -250,14 +251,25 @@ a {
 }
 
 .about-logos img {
-    height: 50px;
+    height: 40px;
     opacity: 1;
     transition: var(--transition);
 }
 
+.animated-logo {
+    animation: logoFloat 4s ease-in-out infinite;
+    animation-delay: calc(var(--delay, 0) * 0.5s);
+}
+
+@keyframes logoFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
 .about-logos img:hover {
     opacity: 1;
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.1);
 }
 
 .about-info {
@@ -454,11 +466,12 @@ a {
     overflow: hidden;
     margin-bottom: 30px;
     box-shadow: var(--shadow);
+    height: 250px; /* Smaller portfolio size */
 }
 
 .portfolio-item img {
     width: 100%;
-    height: 300px;
+    height: 100%;
     object-fit: cover;
     transition: var(--transition);
 }
@@ -468,7 +481,7 @@ a {
     bottom: 0;
     left: 0;
     width: 100%;
-    padding: 30px;
+    padding: 20px;
     background: linear-gradient(to top, rgba(29, 53, 87, 0.9), transparent);
     color: white;
     transform: translateY(20px);
@@ -486,22 +499,22 @@ a {
 }
 
 .portfolio-overlay h5 {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     margin-bottom: 10px;
 }
 
 .portfolio-overlay .tags {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
 }
 
 .portfolio-overlay .tags a {
     background: rgba(255, 255, 255, 0.2);
     color: white;
-    padding: 3px 12px;
+    padding: 3px 10px;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
 }
 
 /* Testimonials */
@@ -930,5 +943,9 @@ footer {
         flex-wrap: wrap;
         justify-content: center;
         gap: 20px;
+    }
+    
+    .portfolio-item {
+        height: 200px;
     }
 }

@@ -1,15 +1,50 @@
-// Back to Top Button
-const backToTop = document.querySelector('.back-to-top');
+// Theme Toggle Functionality
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = themeToggle.querySelector('i');
 
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTop.classList.add('active');
+// Check for saved theme preference or default to 'light'
+const currentTheme = localStorage.getItem('theme') || 'light';
+document.documentElement.setAttribute('data-theme', currentTheme);
+
+// Update icon based on current theme
+if (currentTheme === 'dark') {
+    themeIcon.classList.remove('fa-moon');
+    themeIcon.classList.add('fa-sun');
+} else {
+    themeIcon.classList.remove('fa-sun');
+    themeIcon.classList.add('fa-moon');
+}
+
+// Toggle theme function
+themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+    
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // Update icon
+    if (newTheme === 'dark') {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
     } else {
-        backToTop.classList.remove('active');
+        themeIcon.classList.remove('fa-sun');
+        themeIcon.classList.add('fa-moon');
     }
 });
 
-backToTop.addEventListener('click', (e) => {
+// Back to Top Button
+const backToTopButton = document.querySelector('.back-to-top');
+
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('active');
+    } else {
+        backToTopButton.classList.remove('active');
+    }
+});
+
+backToTopButton.addEventListener('click', (e) => {
     e.preventDefault();
     window.scrollTo({
         top: 0,
@@ -17,81 +52,9 @@ backToTop.addEventListener('click', (e) => {
     });
 });
 
-// Live Chat Widget
-const chatButton = document.querySelector('.chat-button');
-const chatWindow = document.querySelector('.chat-window');
-const chatClose = document.querySelector('.chat-close');
-const chatInput = document.querySelector('.chat-footer input');
-const chatSend = document.querySelector('.chat-footer button');
-const chatBody = document.querySelector('.chat-body');
-
-chatButton.addEventListener('click', () => {
-    chatWindow.classList.toggle('active');
-});
-
-chatClose.addEventListener('click', () => {
-    chatWindow.classList.remove('active');
-});
-
-// Chat functionality
-chatSend.addEventListener('click', sendMessage);
-chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-function sendMessage() {
-    const message = chatInput.value.trim();
-    if (message === '') return;
-    
-    // Add user message
-    addMessage(message, 'user');
-    chatInput.value = '';
-    
-    // Simulate bot response after a short delay
-    setTimeout(() => {
-        const botResponse = generateBotResponse(message);
-        addMessage(botResponse, 'bot');
-    }, 1000);
-}
-
-function addMessage(text, sender) {
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('chat-message', sender);
-    
-    const bubbleDiv = document.createElement('div');
-    bubbleDiv.classList.add('message-bubble');
-    bubbleDiv.textContent = text;
-    
-    messageDiv.appendChild(bubbleDiv);
-    chatBody.appendChild(messageDiv);
-    
-    // Scroll to bottom
-    chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-function generateBotResponse(userMessage) {
-    const lowerMessage = userMessage.toLowerCase();
-    
-    if (lowerMessage.includes('hello') || lowerMessage.includes('hi')) {
-        return "Hello! How can I help you today?";
-    } else if (lowerMessage.includes('service') || lowerMessage.includes('what do you do')) {
-        return "We offer software development, digital marketing, IT consultation, and more. Which service are you interested in?";
-    } else if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
-        return "Our pricing depends on the scope of your project. Would you like to schedule a free consultation to discuss your needs?";
-    } else if (lowerMessage.includes('contact') || lowerMessage.includes('email') || lowerMessage.includes('phone')) {
-        return "You can reach us at info@zuraaddiss.com or call (+251) 97 940 4142. Our office is in Addis Ababa, Ethiopia.";
-    } else if (lowerMessage.includes('portfolio') || lowerMessage.includes('work')) {
-        return "You can view our portfolio on our website. We've completed over 120 projects for various clients.";
-    } else {
-        return "Thank you for your message. Our team will get back to you shortly. Is there anything specific you'd like to know about our services?";
-    }
-}
-
 // Portfolio Filter
 const filterButtons = document.querySelectorAll('.portfolio-filter button');
-const portfolioItems = document.querySelectorAll('.portfolio-item');
+const portfolioItems = document.querySelectorAll('.portfolio-grid .col-lg-4');
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
@@ -106,26 +69,82 @@ filterButtons.forEach(button => {
         portfolioItems.forEach(item => {
             if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
                 item.style.display = 'block';
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                }, 100);
             } else {
-                item.style.display = 'none';
+                item.style.opacity = '0';
+                item.style.transform = 'scale(0.8)';
+                setTimeout(() => {
+                    item.style.display = 'none';
+                }, 300);
             }
         });
     });
 });
 
-// Navbar scroll effect
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.pageYOffset > 100) {
-        navbar.style.padding = '10px 0';
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.padding = '20px 0';
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.05)';
+// Live Chat Functionality
+const chatButton = document.querySelector('.chat-button');
+const chatWindow = document.querySelector('.chat-window');
+const chatClose = document.querySelector('.chat-close');
+const chatSend = document.querySelector('.chat-footer button');
+const chatInput = document.querySelector('.chat-footer input');
+
+chatButton.addEventListener('click', () => {
+    chatWindow.classList.toggle('active');
+});
+
+chatClose.addEventListener('click', () => {
+    chatWindow.classList.remove('active');
+});
+
+chatSend.addEventListener('click', sendMessage);
+
+chatInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        sendMessage();
     }
 });
 
-// Smooth scrolling for anchor links
+function sendMessage() {
+    const message = chatInput.value.trim();
+    if (message) {
+        // Add user message
+        addMessage(message, 'user');
+        chatInput.value = '';
+        
+        // Simulate bot response after a delay
+        setTimeout(() => {
+            const responses = [
+                "Thanks for your message! Our team will get back to you soon.",
+                "I understand you're interested in our services. Let me connect you with a specialist.",
+                "Great question! Our business hours are Monday-Friday, 9am-5pm.",
+                "We'd be happy to discuss your project. Would you like to schedule a consultation?"
+            ];
+            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+            addMessage(randomResponse, 'bot');
+        }, 1000);
+    }
+}
+
+function addMessage(text, sender) {
+    const chatBody = document.querySelector('.chat-body');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('chat-message', sender);
+    
+    const bubbleDiv = document.createElement('div');
+    bubbleDiv.classList.add('message-bubble');
+    bubbleDiv.textContent = text;
+    
+    messageDiv.appendChild(bubbleDiv);
+    chatBody.appendChild(messageDiv);
+    
+    // Scroll to bottom
+    chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Smooth Scrolling for Navigation Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -139,71 +158,168 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 top: targetElement.offsetTop - 80,
                 behavior: 'smooth'
             });
+            
+            // Close mobile menu if open
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse.classList.contains('show')) {
+                const navbarToggler = document.querySelector('.navbar-toggler');
+                navbarToggler.click();
+            }
         }
     });
 });
 
-// Contact form submission
-const contactForm = document.getElementById('contactForm');
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    alert('Thank you for your message! We will get back to you soon.');
-    contactForm.reset();
-});
-
-// Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = themeToggle.querySelector('i');
-
-// Check for saved theme preference or default to light
-const currentTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', currentTheme);
-updateThemeIcon(currentTheme);
-
-themeToggle.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-    
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
-});
-
-function updateThemeIcon(theme) {
-    if (theme === 'dark') {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-    }
-}
-
-// Add animation on scroll
-function animateOnScroll() {
-    const elements = document.querySelectorAll('.service-card, .portfolio-item, .num-item');
-    
-    elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
+// Navbar Background on Scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.pageYOffset > 50) {
+        navbar.style.background = '#111111';
+        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
         
-        if (elementTop < window.innerHeight - elementVisible) {
-            element.style.opacity = "1";
-            element.style.transform = "translateY(0)";
+        if (document.documentElement.getAttribute('data-theme') === 'dark') {
+            navbar.style.background = '#1a1a1a';
+        }
+    } else {
+        navbar.style.background = 'transparent';
+        navbar.style.boxShadow = 'none';
+    }
+});
+
+// Form Submission
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(contactForm);
+        const name = formData.get('name') || 'Not provided';
+        const email = formData.get('email') || 'Not provided';
+        const subject = formData.get('subject') || 'No subject';
+        const message = formData.get('message') || 'No message';
+        
+        // In a real application, you would send this data to a server
+        // For demo purposes, we'll just show an alert
+        alert(`Thank you for your message, ${name}! We'll get back to you soon at ${email}.`);
+        
+        // Reset form
+        contactForm.reset();
+    });
+}
+
+// Counter Animation for About Numbers
+function animateCounters() {
+    const counters = document.querySelectorAll('.num-item .num');
+    const speed = 200;
+    
+    counters.forEach(counter => {
+        const target = +counter.innerText.replace('+', '');
+        const count = +counter.innerText.replace('+', '');
+        const increment = target / speed;
+        
+        if (count < target) {
+            counter.innerText = Math.ceil(count + increment) + '+';
+            setTimeout(animateCounters, 1);
+        } else {
+            counter.innerText = target + '+';
         }
     });
 }
 
-// Set initial state for animation
-document.addEventListener('DOMContentLoaded', () => {
-    const elements = document.querySelectorAll('.service-card, .portfolio-item, .num-item');
-    elements.forEach(element => {
-        element.style.opacity = "0";
-        element.style.transform = "translateY(20px)";
-        element.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+// Initialize counters when about section is in view
+const aboutSection = document.querySelector('.about');
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.3
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateCounters();
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+if (aboutSection) {
+    observer.observe(aboutSection);
+}
+
+// Enhanced 3D Logo Animation
+const logo3d = document.querySelector('.logo-3d');
+if (logo3d) {
+    // Add mouse move effect for more interactive 3D
+    document.addEventListener('mousemove', (e) => {
+        if (!logo3d) return;
+        
+        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
+        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+        
+        logo3d.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
     });
     
-    window.addEventListener('scroll', animateOnScroll);
-    // Trigger once on load in case elements are already in view
-    animateOnScroll();
+    // Reset when mouse leaves the document
+    document.addEventListener('mouseleave', () => {
+        if (logo3d) {
+            logo3d.style.transform = 'rotateY(0deg) rotateX(0deg)';
+        }
+    });
+}
+
+// Animated logos in about section
+function initLogoAnimations() {
+    const logos = document.querySelectorAll('.animated-logo');
+    logos.forEach((logo, index) => {
+        logo.style.setProperty('--delay', index);
+    });
+}
+
+// Initialize AOS (Animate On Scroll) - would need AOS library included
+// For this demo, we'll create a simple fade-in animation
+function initScrollAnimations() {
+    const animatedElements = document.querySelectorAll('.service-card, .portfolio-item, .testimonial-card, .num-item');
+    
+    const fadeInObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                fadeInObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        fadeInObserver.observe(el);
+    });
+}
+
+// Initialize animations when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initScrollAnimations();
+    initLogoAnimations();
+    
+    // Add loading animation
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.5s ease';
+    
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+    }, 100);
+});
+
+// Add some interactive hover effects for service cards
+document.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-10px) scale(1.02)';
+    });
+    
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1)';
+    });
 });
