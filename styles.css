@@ -296,8 +296,8 @@ a {
 }
 
 .motion-logo {
-    width: 400px;
-    height: 400px;
+    width: 700px;
+    height: 700px;
     z-index: 2;
     animation: float 6s ease-in-out infinite;
 }
@@ -319,7 +319,7 @@ a {
 .orbit {
     position: absolute;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border:2px solid rgba(255, 255, 255, 0.2);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
