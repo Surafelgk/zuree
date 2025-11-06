@@ -1,325 +1,410 @@
-// Theme Toggle Functionality
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = themeToggle.querySelector('i');
-
-// Check for saved theme preference or default to 'light'
-const currentTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', currentTheme);
-
-// Update icon based on current theme
-if (currentTheme === 'dark') {
-    themeIcon.classList.remove('fa-moon');
-    themeIcon.classList.add('fa-sun');
-} else {
-    themeIcon.classList.remove('fa-sun');
-    themeIcon.classList.add('fa-moon');
-}
-
-// Toggle theme function
-themeToggle.addEventListener('click', () => {
-    const currentTheme = document.documentElement.getAttribute('data-theme');
-    const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+// DOM Content Loaded
+document.addEventListener('DOMContentLoaded', function() {
     
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
+    // Initialize all components
+    initNavbar();
+    initScrollToSection();
+    initBackToTop();
+    initThemeToggle();
+    initLiveChat();
+    initContactForm();
+    initAnimations();
+    initCounterAnimation();
     
-    // Update icon
-    if (newTheme === 'dark') {
-        themeIcon.classList.remove('fa-moon');
-        themeIcon.classList.add('fa-sun');
-    } else {
-        themeIcon.classList.remove('fa-sun');
-        themeIcon.classList.add('fa-moon');
-    }
+    console.log('ZuraAddiss website initialized successfully');
 });
 
-// Back to Top Button
-const backToTopButton = document.querySelector('.back-to-top');
-
-window.addEventListener('scroll', () => {
-    if (window.pageYOffset > 300) {
-        backToTopButton.classList.add('active');
-    } else {
-        backToTopButton.classList.remove('active');
-    }
-});
-
-backToTopButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
+// Navbar functionality
+function initNavbar() {
+    const navbar = document.querySelector('.navbar');
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     });
-});
-
-// Portfolio Filter
-const filterButtons = document.querySelectorAll('.portfolio-filter button');
-const portfolioItems = document.querySelectorAll('.portfolio-grid .col-lg-4');
-
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // Remove active class from all buttons
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        
-        // Add active class to clicked button
-        button.classList.add('active');
-        
-        const filterValue = button.getAttribute('data-filter');
-        
-        portfolioItems.forEach(item => {
-            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-                item.style.display = 'block';
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'scale(1)';
-                }, 100);
-            } else {
-                item.style.opacity = '0';
-                item.style.transform = 'scale(0.8)';
-                setTimeout(() => {
-                    item.style.display = 'none';
-                }, 300);
+    
+    // Close navbar when clicking on a link (mobile)
+    const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navbarCollapse.classList.contains('show')) {
+                navbarToggler.click();
             }
         });
     });
-});
-
-// Live Chat Functionality
-const chatButton = document.querySelector('.chat-button');
-const chatWindow = document.querySelector('.chat-window');
-const chatClose = document.querySelector('.chat-close');
-const chatSend = document.querySelector('.chat-footer button');
-const chatInput = document.querySelector('.chat-footer input');
-
-chatButton.addEventListener('click', () => {
-    chatWindow.classList.toggle('active');
-});
-
-chatClose.addEventListener('click', () => {
-    chatWindow.classList.remove('active');
-});
-
-chatSend.addEventListener('click', sendMessage);
-
-chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        sendMessage();
-    }
-});
-
-function sendMessage() {
-    const message = chatInput.value.trim();
-    if (message) {
-        // Add user message
-        addMessage(message, 'user');
-        chatInput.value = '';
-        
-        // Simulate bot response after a delay
-        setTimeout(() => {
-            const responses = [
-                "Thanks for your message! Our team will get back to you soon.",
-                "I understand you're interested in our services. Let me connect you with a specialist.",
-                "Great question! Our business hours are Monday-Friday, 9am-5pm.",
-                "We'd be happy to discuss your project. Would you like to schedule a consultation?"
-            ];
-            const randomResponse = responses[Math.floor(Math.random() * responses.length)];
-            addMessage(randomResponse, 'bot');
-        }, 1000);
-    }
 }
 
-function addMessage(text, sender) {
-    const chatBody = document.querySelector('.chat-body');
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('chat-message', sender);
+// Smooth scroll to section
+function initScrollToSection() {
+    const scrollButtons = document.querySelectorAll('.scroll-to-section');
     
-    const bubbleDiv = document.createElement('div');
-    bubbleDiv.classList.add('message-bubble');
-    bubbleDiv.textContent = text;
-    
-    messageDiv.appendChild(bubbleDiv);
-    chatBody.appendChild(messageDiv);
-    
-    // Scroll to bottom
-    chatBody.scrollTop = chatBody.scrollHeight;
-}
-
-// Smooth Scrolling for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        if (targetElement) {
-            window.scrollTo({
-                top: targetElement.offsetTop - 80,
-                behavior: 'smooth'
-            });
+    scrollButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
             
-            // Close mobile menu if open
-            const navbarCollapse = document.querySelector('.navbar-collapse');
-            if (navbarCollapse.classList.contains('show')) {
-                const navbarToggler = document.querySelector('.navbar-toggler');
-                navbarToggler.click();
+            const targetId = this.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
+            
+            if (targetSection) {
+                const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                const targetPosition = targetSection.offsetTop - navbarHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
             }
+        });
+    });
+    
+    // Fix for Get Started and Our Services buttons
+    const getStartedBtn = document.querySelector('a[href="#contact"]');
+    const ourServicesBtn = document.querySelector('a[href="#services"]');
+    
+    if (getStartedBtn) {
+        getStartedBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#contact').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    }
+    
+    if (ourServicesBtn) {
+        ourServicesBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#services').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    }
+}
+
+// Back to top button
+function initBackToTop() {
+    const backToTopButton = document.querySelector('.back-to-top');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            backToTopButton.classList.add('active');
+        } else {
+            backToTopButton.classList.remove('active');
         }
     });
-});
-
-// Navbar Background on Scroll
-window.addEventListener('scroll', () => {
-    const navbar = document.querySelector('.navbar');
-    if (window.pageYOffset > 50) {
-        navbar.style.background = '#111111';
-        navbar.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
-        
-        if (document.documentElement.getAttribute('data-theme') === 'dark') {
-            navbar.style.background = '#1a1a1a';
-        }
-    } else {
-        navbar.style.background = 'transparent';
-        navbar.style.boxShadow = 'none';
-    }
-});
-
-// Form Submission
-const contactForm = document.getElementById('contactForm');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
+    
+    backToTopButton.addEventListener('click', function(e) {
         e.preventDefault();
-        
-        // Get form data
-        const formData = new FormData(contactForm);
-        const name = formData.get('name') || 'Not provided';
-        const email = formData.get('email') || 'Not provided';
-        const subject = formData.get('subject') || 'No subject';
-        const message = formData.get('message') || 'No message';
-        
-        // In a real application, you would send this data to a server
-        // For demo purposes, we'll just show an alert
-        alert(`Thank you for your message, ${name}! We'll get back to you soon at ${email}.`);
-        
-        // Reset form
-        contactForm.reset();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
     });
 }
 
-// Counter Animation for About Numbers
-function animateCounters() {
-    const counters = document.querySelectorAll('.num-item .num');
-    const speed = 200;
+// Theme toggle functionality
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = themeToggle.querySelector('i');
+    
+    // Check for saved theme preference or default to light
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', currentTheme);
+    
+    // Update icon based on current theme
+    if (currentTheme === 'dark') {
+        themeIcon.classList.remove('fa-moon');
+        themeIcon.classList.add('fa-sun');
+    }
+    
+    themeToggle.addEventListener('click', function() {
+        const currentTheme = document.documentElement.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        
+        // Set new theme
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        
+        // Update icon
+        if (newTheme === 'dark') {
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+    });
+}
+
+// Live chat functionality
+function initLiveChat() {
+    const chatButton = document.querySelector('.chat-button');
+    const chatWindow = document.querySelector('.chat-window');
+    const chatClose = document.querySelector('.chat-close');
+    const chatSend = document.querySelector('.chat-footer button');
+    const chatInput = document.querySelector('.chat-footer input');
+    
+    // Toggle chat window
+    chatButton.addEventListener('click', function() {
+        chatWindow.classList.toggle('active');
+    });
+    
+    // Close chat window
+    chatClose.addEventListener('click', function() {
+        chatWindow.classList.remove('active');
+    });
+    
+    // Send message
+    chatSend.addEventListener('click', sendMessage);
+    chatInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+    
+    function sendMessage() {
+        const message = chatInput.value.trim();
+        
+        if (message) {
+            // Add user message
+            addMessage(message, 'user');
+            
+            // Clear input
+            chatInput.value = '';
+            
+            // Simulate bot response after delay
+            setTimeout(() => {
+                const responses = [
+                    "Thanks for your message! Our team will get back to you soon.",
+                    "I understand you're interested in our services. Would you like to schedule a consultation?",
+                    "That's a great question! Let me connect you with one of our specialists.",
+                    "We'd love to help with that. Can you provide more details about your project?"
+                ];
+                
+                const randomResponse = responses[Math.floor(Math.random() * responses.length)];
+                addMessage(randomResponse, 'bot');
+            }, 1000);
+        }
+    }
+    
+    function addMessage(text, sender) {
+        const chatBody = document.querySelector('.chat-body');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('chat-message', sender);
+        
+        const bubbleDiv = document.createElement('div');
+        bubbleDiv.classList.add('message-bubble');
+        bubbleDiv.textContent = text;
+        
+        messageDiv.appendChild(bubbleDiv);
+        chatBody.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatBody.scrollTop = chatBody.scrollHeight;
+    }
+}
+
+// Contact form functionality
+function initContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const name = this.querySelector('input[type="text"]').value;
+            const email = this.querySelector('input[type="email"]').value;
+            const subject = this.querySelectorAll('input[type="text"]')[1].value;
+            const message = this.querySelector('textarea').value;
+            
+            // Simple validation
+            if (!name || !email || !message) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+            
+            // In a real application, you would send the data to a server here
+            setTimeout(() => {
+                alert('Thank you for your message! We will get back to you soon.');
+                contactForm.reset();
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }, 1500);
+        });
+    }
+}
+
+// Counter animation for statistics
+function initCounterAnimation() {
+    const counters = document.querySelectorAll('.num');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = parseInt(counter.getAttribute('data-count'));
+                const duration = 2000; // 2 seconds
+                const step = target / (duration / 16); // 60fps
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        counter.textContent = target + '+';
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = Math.floor(current) + '+';
+                    }
+                }, 16);
+                
+                observer.unobserve(counter);
+            }
+        });
+    }, { threshold: 0.5 });
     
     counters.forEach(counter => {
-        const target = +counter.innerText.replace('+', '');
-        const count = +counter.innerText.replace('+', '');
-        const increment = target / speed;
-        
-        if (count < target) {
-            counter.innerText = Math.ceil(count + increment) + '+';
-            setTimeout(animateCounters, 1);
-        } else {
-            counter.innerText = target + '+';
-        }
+        observer.observe(counter);
     });
 }
 
-// Initialize counters when about section is in view
-const aboutSection = document.querySelector('.about');
-const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.3
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            animateCounters();
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-if (aboutSection) {
-    observer.observe(aboutSection);
-}
-
-// Enhanced 3D Logo Animation
-const logo3d = document.querySelector('.logo-3d');
-if (logo3d) {
-    // Add mouse move effect for more interactive 3D
-    document.addEventListener('mousemove', (e) => {
-        if (!logo3d) return;
+// Animations and effects
+function initAnimations() {
+    // Animate elements on scroll
+    const animateOnScroll = function() {
+        const elements = document.querySelectorAll('.service-card, .feature-card, .testimonial-card, .num-item, .process-step, .client-logo');
         
-        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
-        
-        logo3d.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        elements.forEach(element => {
+            const elementPosition = element.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.2;
+            
+            if (elementPosition < screenPosition) {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }
+        });
+    };
+    
+    // Set initial state for animated elements
+    const animatedElements = document.querySelectorAll('.service-card, .feature-card, .testimonial-card, .num-item, .process-step, .client-logo');
+    animatedElements.forEach(element => {
+        element.style.opacity = '0';
+        element.style.transform = 'translateY(20px)';
+        element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     });
     
-    // Reset when mouse leaves the document
-    document.addEventListener('mouseleave', () => {
-        if (logo3d) {
-            logo3d.style.transform = 'rotateY(0deg) rotateX(0deg)';
-        }
-    });
-}
-
-// Animated logos in about section
-function initLogoAnimations() {
+    // Trigger animation on scroll
+    window.addEventListener('scroll', animateOnScroll);
+    
+    // Trigger once on load
+    animateOnScroll();
+    
+    // Add animation delays to logos
     const logos = document.querySelectorAll('.animated-logo');
     logos.forEach((logo, index) => {
         logo.style.setProperty('--delay', index);
     });
-}
-
-// Initialize AOS (Animate On Scroll) - would need AOS library included
-// For this demo, we'll create a simple fade-in animation
-function initScrollAnimations() {
-    const animatedElements = document.querySelectorAll('.service-card, .portfolio-item, .testimonial-card, .num-item');
     
-    const fadeInObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-                fadeInObserver.unobserve(entry.target);
+    // Interactive 3D logo
+    const logo3dContainer = document.querySelector('.logo-3d-container');
+    const logo3d = document.querySelector('.logo-3d');
+    
+    if (logo3dContainer && logo3d) {
+        let isPaused = false;
+        
+        // Pause animation on hover
+        logo3dContainer.addEventListener('mouseenter', function() {
+            logo3d.style.animationPlayState = 'paused';
+            isPaused = true;
+        });
+        
+        // Resume animation on mouse leave
+        logo3dContainer.addEventListener('mouseleave', function() {
+            logo3d.style.animationPlayState = 'running';
+            isPaused = false;
+        });
+        
+        // Interactive rotation on mousemove
+        logo3dContainer.addEventListener('mousemove', function(e) {
+            if (isPaused) {
+                const rect = logo3dContainer.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const rotateY = (x / rect.width - 0.5) * 60;
+                const rotateX = (0.5 - y / rect.height) * 60;
+                
+                logo3d.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg)`;
             }
         });
-    }, { threshold: 0.1 });
+        
+        // Reset rotation on mouse leave
+        logo3dContainer.addEventListener('mouseleave', function() {
+            if (!isPaused) {
+                logo3d.style.transform = 'rotateY(0deg) rotateX(10deg)';
+            }
+        });
+    }
     
-    animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        fadeInObserver.observe(el);
+    // Parallax effect for hero section
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const hero = document.querySelector('.hero');
+        const heroContent = document.querySelector('.hero .container');
+        
+        if (hero && heroContent) {
+            heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
+        }
     });
+    
+    // Typing effect for hero text
+    const heroText = document.querySelector('.hero h1');
+    if (heroText) {
+        const text = heroText.textContent;
+        heroText.textContent = '';
+        
+        let i = 0;
+        const typeWriter = () => {
+            if (i < text.length) {
+                heroText.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        };
+        
+        // Start typing effect after a short delay
+        setTimeout(typeWriter, 1000);
+    }
 }
 
-// Initialize animations when DOM is loaded
-document.addEventListener('DOMContentLoaded', () => {
-    initScrollAnimations();
-    initLogoAnimations();
-    
-    // Add loading animation
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-    
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
-});
+// Additional utility functions
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function() {
+        const context = this, args = arguments;
+        const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+}
 
-// Add some interactive hover effects for service cards
-document.querySelectorAll('.service-card').forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transform = 'translateY(-10px) scale(1.02)';
-    });
-    
-    card.addEventListener('mouseleave', function() {
-        this.style.transform = 'translateY(0) scale(1)';
-    });
-});
+// Make functions available globally
+window.initThemeToggle = initThemeToggle;

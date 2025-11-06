@@ -23,7 +23,7 @@
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="assets/img/logo.png" alt="ZuraAddiss">
+                <img src="assets/img/logo.png" alt="ZureAddiss">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -40,9 +40,6 @@
                         <a class="nav-link" href="#services">Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#portfolio">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#testimonials">Testimonials</a>
                     </li>
                     <li class="nav-item">
@@ -55,7 +52,7 @@
                     </div>
                     <div class="cont">
                         <small>Call us on</small>
-                        <h6>(+251)926 737 596</h6>
+                        <h6>(+251) 941 920 096</h6>
                     </div>
                 </div>
                 <div class="theme-toggle ms-3">
@@ -76,24 +73,45 @@
                     <h1>Empowering Ethiopian Communities <span class="fw-normal">through innovation</span></h1>
                     <p>An innovative technology solutions company dedicated to revolutionizing the business landscape in Ethiopia.</p>
                     <div class="bttns mt-4">
-                        <a href="#contact" class="btn btn-primary me-3">Get Started</a>
-                        <a href="#services" class="btn btn-outline-primary">Our Services</a>
+                        <a href="#contact" class="btn btn-primary me-3 scroll-to-section">Get Started</a>
+                        <a href="#services" class="btn btn-outline-primary scroll-to-section">Our Services</a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="hero-img text-center">
                         <div class="logo-3d-container">
-                            <img src="assets/img/logo_3d.png" alt="ZuraAddiss" class="img-fluid logo-3d">
+                            <div class="logo-3d">
+                                <div class="logo-face logo-front">
+                                    <img src="assets/img/logo_3d.png" alt="ZuraAddiss" class="img-fluid">
+                                </div>
+                                <div class="logo-face logo-back"></div>
+                                <div class="logo-face logo-left"></div>
+                                <div class="logo-face logo-right"></div>
+                                <div class="logo-face logo-top"></div>
+                                <div class="logo-face logo-bottom"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="section-padding about">
         <div class="container">
+            <div class="section-title">
+                <h6>About Us</h6>
+                <h2>Empowering Innovation <span>in Ethiopia</span></h2>
+            </div>
+            
             <div class="about-logos d-flex justify-content-between align-items-center">
                 <img src="assets/img/about/about_logos/1.jpeg" alt="Client" class="animated-logo">
                 <img src="assets/img/about/about_logos/2.jpeg" alt="Client" class="animated-logo">
@@ -105,8 +123,10 @@
             <div class="about-info">
                 <div class="row">
                     <div class="col-lg-5 mb-5 mb-lg-0">
-                        <h3>"Technology is best when it brings people together."</h3>
-                        <small>BIRUK HAILU</small>
+                        <div class="floating-card">
+                            <h3>"Technology is best when it brings people together."</h3>
+                            <small>BIRUK HAILU</small>
+                        </div>
                     </div>
                     <div class="col-lg-6 offset-lg-1">
                         <h6>Zure Addis has been at the forefront of digital innovation, helping brands navigate the ever-evolving digital landscape. Our mission is to provide comprehensive marketing solutions that not only meet but exceed our clients' expectations.</h6>
@@ -119,25 +139,25 @@
                 <div class="row">
                     <div class="col-md-3 col-6 mb-4">
                         <div class="num-item">
-                            <div class="num">5+</div>
+                            <div class="num" data-count="5">0+</div>
                             <div class="inf">Years of Experience</div>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="num-item">
-                            <div class="num">120+</div>
+                            <div class="num" data-count="120">0+</div>
                             <div class="inf">Projects Completed</div>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="num-item">
-                            <div class="num">25+</div>
+                            <div class="num" data-count="25">0+</div>
                             <div class="inf">Team Members</div>
                         </div>
                     </div>
                     <div class="col-md-3 col-6 mb-4">
                         <div class="num-item">
-                            <div class="num">95+</div>
+                            <div class="num" data-count="95">0+</div>
                             <div class="inf">Happy Clients</div>
                         </div>
                     </div>
@@ -158,7 +178,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-card">
                         <div class="icon">
-                            <img src="assets/img/icons/serv_icons/swe-2.webp" alt="Software Development">
+                            <i class="fas fa-code"></i>
                         </div>
                         <h5>Software Development</h5>
                         <p>Custom-built applications and solutions tailored to your business needs, from web and mobile apps to enterprise software, ensuring scalability, security, and efficiency.</p>
@@ -173,7 +193,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-card">
                         <div class="icon">
-                            <img src="assets/img/icons/serv_icons/consult.webp" alt="IT Consultation">
+                            <i class="fas fa-laptop-code"></i>
                         </div>
                         <h5>IT Consultation</h5>
                         <p>Expert advice on technology strategy, infrastructure optimization, and digital transformation to align IT with your goals, reduce costs, and mitigate risks.</p>
@@ -188,7 +208,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-card">
                         <div class="icon">
-                            <img src="assets/img/icons/serv_icons/cloud.webp" alt="Cloud Services">
+                            <i class="fas fa-cloud"></i>
                         </div>
                         <h5>Cloud Services</h5>
                         <p>Secure, flexible cloud hosting, migration, and management on platforms like AWS, Azure, or Google Cloud, enabling seamless scalability, data backup, and remote access.</p>
@@ -202,7 +222,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-card">
                         <div class="icon">
-                            <img src="assets/img/icons/serv_icons/16.png" alt="Digital Marketing">
+                            <i class="fas fa-chart-line"></i>
                         </div>
                         <h5>Digital Marketing</h5>
                         <p>Comprehensive online strategies including SEO, PPC, email campaigns, and content marketing to boost visibility, drive traffic, and increase conversions.</p>
@@ -217,7 +237,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-card">
                         <div class="icon">
-                            <img src="assets/img/icons/serv_icons/17.png" alt="Social Media Management">
+                            <i class="fas fa-hashtag"></i>
                         </div>
                         <h5>Social Media Management</h5>
                         <p>Strategic planning, content creation, and community engagement across platforms like Instagram, LinkedIn, and TikTok to grow your audience and enhance brand loyalty.</p>
@@ -233,7 +253,7 @@
                 <div class="col-lg-4 col-md-6 mb-4">
                     <div class="service-card">
                         <div class="icon">
-                            <img src="assets/img/icons/serv_icons/19.png" alt="Video and Audio Production">
+                            <i class="fas fa-video"></i>
                         </div>
                         <h5>Video and Audio Production</h5>
                         <p>Professional creation of high-quality videos, podcasts, and audio content, from scripting and filming to editing and distribution, for engaging storytelling and marketing.</p>
@@ -245,62 +265,39 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="section-padding portfolio">
-        <div class="container">
-            <div class="section-title">
-                <h6>Portfolio</h6>
-                <h2>Latest Projects <span>From Our Team</span></h2>
-            </div>
             
-            <div class="portfolio-filter mb-5">
-                <button class="active" data-filter="all">All</button>
-                <button data-filter="web">Web Development</button>
-                <button data-filter="app">App Development</button>
-                <button data-filter="marketing">Digital Marketing</button>
-            </div>
-            
-            <div class="row portfolio-grid">
-                <div class="col-lg-4 col-md-6 mb-4" data-category="web">
-                    <div class="portfolio-item">
-                        <img src="assets/img/projects/prog/2.jpeg" alt="My Ekub Mobile App">
-                        <div class="portfolio-overlay">
-                            <h5>My Ekub Mobile App</h5>
-                            <div class="tags">
-                                <a>App Development</a>
-                            </div>
+            <!-- Service Process -->
+            <div class="service-process mt-5">
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="text-center mb-5">Our Process</h3>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="process-step">
+                            <div class="step-number">01</div>
+                            <h5>Consultation</h5>
+                            <p>We discuss your needs and goals to understand your requirements.</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4" data-category="web">
-                    <div class="portfolio-item">
-                        <img src="assets/img/projects/prog/1.jpeg" alt="Mesob ERP">
-                        <div class="portfolio-overlay">
-                            <h5>viva</h5>
-                            <div class="tags">
-                                <a>WordPress</a>
-                                <a>PHP</a>
-                                <a>HTML/CSS</a>
-                                <a>Figma</a>
-                            </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="process-step">
+                            <div class="step-number">02</div>
+                            <h5>Planning</h5>
+                            <p>We create a detailed plan and strategy for your project.</p>
                         </div>
                     </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6 mb-4" data-category="app">
-                    <div class="portfolio-item">
-                        <img src="assets/img/projects/prog/2 (2).png" alt="Bingo Game">
-                        <div class="portfolio-overlay">
-                            <h5>Bingo Game</h5>
-                            <div class="tags">
-                                <a>VR/AR</a>
-                                <a>iOS & Android</a>
-                                <a>Unity 2D/3D</a>
-                            </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="process-step">
+                            <div class="step-number">03</div>
+                            <h5>Execution</h5>
+                            <p>Our team implements the solution with precision and expertise.</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="process-step">
+                            <div class="step-number">04</div>
+                            <h5>Support</h5>
+                            <p>We provide ongoing support and maintenance for your solution.</p>
                         </div>
                     </div>
                 </div>
@@ -319,12 +316,19 @@
             <div class="row">
                 <div class="col-lg-6 mb-4">
                     <div class="testimonial-card">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
                         <p>Working with ZuraAddiss has been a game-changer for our business. Their team delivered a custom software solution that streamlined our operations and increased our efficiency by 40%.</p>
                         <div class="testimonial-author">
-                            <img src="assets/img/testimonials/1.jpg" alt="Client">
+                            <img src="assets/img/testimonials/dins.png" alt="Client">
                             <div>
-                                <h6>BIRUK HAILU</h6>
-                                <small>CEO, Ethiopian Tech Solutions</small>
+                                <h6>Dina</h6>
+                                <small>Dina Investment Group</small>
                             </div>
                         </div>
                     </div>
@@ -332,13 +336,59 @@
                 
                 <div class="col-lg-6 mb-4">
                     <div class="testimonial-card">
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
                         <p>The digital marketing campaign created by ZuraAddiss significantly increased our online presence and sales. Their understanding of the Ethiopian market is exceptional.</p>
                         <div class="testimonial-author">
-                            <img src="assets/img/testimonials/2.jpg" alt="Client">
+                            <img src="assets/img/testimonials/equb.jpeg" alt="Client">
                             <div>
-                                <h6>HEAVEN TAME</h6>
-                                <small>Marketing Director, Addis Fashion House</small>
+                                <h6>EQUB</h6>
+                                <small>Financial Services Company</small>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Client Logos -->
+            <!-- <div class="client-logos mt-5">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h4 class="mb-4">Trusted By</h4>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="client-logo">
+                            <img src="assets/img/clients/client1.png" alt="Client 1">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="client-logo">
+                            <img src="assets/img/clients/client2.png" alt="Client 2">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="client-logo">
+                            <img src="assets/img/clients/client3.png" alt="Client 3">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="client-logo">
+                            <img src="assets/img/clients/client4.png" alt="Client 4">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="client-logo">
+                            <img src="assets/img/clients/client5.png" alt="Client 5">
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="client-logo">
+                            <img src="assets/img/clients/client6.png" alt="Client 6">-->
                         </div>
                     </div>
                 </div>
@@ -363,21 +413,21 @@
                                 <i class="fas fa-map-marker-alt"></i>
                                 <div>
                                     <h6>Our Location</h6>
-                                    <p>Addis Ababa, Ethiopia</p>
+                                    <p>Addis Ababa, Ethiopia, Bole ,Welela Building </p>
                                 </div>
                             </li>
                             <li>
                                 <i class="fas fa-phone"></i>
                                 <div>
                                     <h6>Phone Number</h6>
-                                    <p>(+251) 926737596</p>
+                                    <p>(+251)941 920 096</p>
                                 </div>
                             </li>
                             <li>
                                 <i class="fas fa-envelope"></i>
                                 <div>
                                     <h6>Email Address</h6>
-                                    <p>info@zuraaddiss.com</p>
+                                    <p>zureaddiss@gmail.com</p>
                                 </div>
                             </li>
                             <li>
@@ -424,14 +474,14 @@
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0">
                     <div class="footer-logo">
-                        <img src="assets/img/logo.png" alt="ZuraAddiss">
+                        <img src="assets/img/logo.png" alt="ZureAddiss">
                     </div>
                     <p>An innovative technology solutions company dedicated to revolutionizing the business landscape in Ethiopia.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.instagram.com/zureaddis/"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.linkedin.com/company/zure-addis?originalSubdomain=et"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 
@@ -442,7 +492,7 @@
                             <li><a href="#home">Home</a></li>
                             <li><a href="#about">About Us</a></li>
                             <li><a href="#services">Services</a></li>
-                            <li><a href="#portfolio">Portfolio</a></li>
+                            <li><a href="#testimonials">Testimonials</a></li>
                             <li><a href="#contact">Contact</a></li>
                         </ul>
                     </div>
@@ -452,11 +502,11 @@
                     <div class="footer-links">
                         <h6>Our Services</h6>
                         <ul>
-                            <li><a href="#">Software Development</a></li>
-                            <li><a href="#">IT Consultation</a></li>
-                            <li><a href="#">Cloud Services</a></li>
                             <li><a href="#">Digital Marketing</a></li>
                             <li><a href="#">Social Media Management</a></li>
+                            <li><a href="#">Cloud Services</a></li>
+                            <li><a href="#">Software Development</a></li>
+                            <li><a href="#">IT Consultation</a></li>
                         </ul>
                     </div>
                 </div>
@@ -465,16 +515,16 @@
                     <div class="footer-links">
                         <h6>Contact Us</h6>
                         <ul>
-                            <li><a href="tel:+251979404142"><i class="fas fa-phone me-2"></i> (+251) 926 737 596</a></li>
-                            <li><a href="mailto:info@zuraaddiss.com"><i class="fas fa-envelope me-2"></i> info@zuraaddiss.com</a></li>
-                            <li><a href="#"><i class="fas fa-map-marker-alt me-2"></i> Bole ,Weleal building   Addis Ababa, Ethiopia</a></li>
+                            <li><a href="tel:+251941920096"><i class="fas fa-phone me-2"></i> (+251)941 920 096</a></li>
+                            <li><a href="mailto:zureaddis@gmail.com"><i class="fas fa-envelope me-2"></i>zureaddis@gmail.com</a></li>
+                            <li><a href="#"><i class="fas fa-map-marker-alt me-2"></i> Addis Ababa, Ethiopia, Bole ,Welela Building</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2025 ZuraAddiss PLC. All Rights Reserved.</p>
+                <p>&copy; 2025 ZureAddis PLC. All Rights Reserved.</p>
             </div>
         </div>
     </footer>
@@ -487,11 +537,20 @@
     <!-- Live Chat Widget -->
     <div class="live-chat">
         <div class="chat-button">
-            <i class="fas fa-comments"></i>
+            <div class="chat-avatar">
+                <img src="assets/img/chat-avatar.png" alt="Support Agent">
+                <div class="chat-status"></div>
+            </div>
         </div>
         <div class="chat-window">
             <div class="chat-header">
-                <h6>ZuraAddiss Support</h6>
+                <div class="agent-info">
+                    <img src="assets/img/chat-avatar.png" alt="Support Agent">
+                    <div>
+                        <h6>ZureAddis Support</h6>
+                        <small>Online</small>
+                    </div>
+                </div>
                 <button class="chat-close">
                     <i class="fas fa-times"></i>
                 </button>
