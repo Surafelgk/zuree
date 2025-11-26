@@ -397,3 +397,9 @@ window.addEventListener('load', () => {
     // Add loaded class to body for any initial animations
     document.body.classList.add('loaded');
 });
+// In the templateData array, update these:
+telegramLink: 'https://t.me/yourchannel/1'
+
+// In the HTML, update these:
+<a href="https://t.me/yourtelegramchannel" class="telegram-btn" target="_blank">
+<a href="https://t.me/yourusername" style="color: white; text-decoration: underline;" target="_blank">@yourusername</a>
